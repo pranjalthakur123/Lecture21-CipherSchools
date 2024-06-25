@@ -1,0 +1,72 @@
+const Task=({task:{title,description,createdDate}}) =>{
+  
+    return (
+        <div className="card" >
+        <div className="content" >
+          
+          <div className="header" >
+            {title}
+          </div>
+          <div className="meta">{createdDate.toLocaleTimeString()}</div>
+          
+          <div className="description" >
+          {description}
+          </div>
+        </div>
+        <div className="extra content" >
+          <div className="ui two buttons" >
+            <div className="ui basic green button" >Edit</div>
+            <div className="ui basic red button" >Delete</div>
+          </div>
+        </div>
+      </div> 
+    );
+};
+export default Task;
+
+
+
+
+
+
+//in todoScreen.js
+import Task from "./Task"
+import {useState} from "react";
+const ToDoScreen=() =>{
+    const [taskList,setTaskList]=useState([]);
+    return (
+                <div className="screen">
+                    <h1 className="ui heading center">To Do List</h1>
+                    <div>
+                      
+                      
+                        <button onClick={(e) => {
+                            setTaskList([
+                                ...taskList,
+                                {
+                                title:"Go to Gym",
+                                description:"Going to gym is good for health",
+                                createdDate:new Date(),
+                            },]);
+                        }} 
+                        className="ui secondary button">Add Task</button>
+                        <section>
+                        <div class="ui cards">
+                        {taskList.map((task)=>(
+                            <Task task={task}/> ))}
+                        </div>
+                        </section>
+                    </div>
+                </div>
+                );
+}
+export default ToDoScreen;
+
+
+// in index.css
+section{
+  padding: 3vh 0;
+}
+
+
+
